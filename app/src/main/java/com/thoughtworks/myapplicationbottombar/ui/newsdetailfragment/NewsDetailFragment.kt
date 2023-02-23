@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.addCallback
 import com.thoughtworks.myapplicationbottombar.R
 
 class NewsDetailFragment : Fragment() {
@@ -23,9 +22,9 @@ class NewsDetailFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(NewsDetailViewModel::class.java)
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
-            parentFragmentManager.popBackStack()
-        }
+//        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
+//            parentFragmentManager.popBackStack()
+//        }
     }
 
 }

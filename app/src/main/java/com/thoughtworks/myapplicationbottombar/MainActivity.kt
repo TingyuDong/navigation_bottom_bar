@@ -51,9 +51,7 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         val primaryNavigationFragment =
             navHostFragment.childFragmentManager.primaryNavigationFragment
-        if (primaryNavigationFragment is NestedFragment) {
-            primaryNavigationFragment.onBackPressed()
-        } else {
+        if (!(primaryNavigationFragment is NestedFragment && primaryNavigationFragment.onBackPressed())) {
             super.onBackPressed()
         }
     }

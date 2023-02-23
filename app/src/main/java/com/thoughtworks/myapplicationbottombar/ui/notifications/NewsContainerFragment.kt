@@ -35,11 +35,12 @@ class NewsContainerFragment : Fragment(), NestedFragment {
         _binding = null
     }
 
-    override fun onBackPressed() {
-        if (childFragmentManager.backStackEntryCount > 0) {
+    override fun onBackPressed(): Boolean {
+        return if (childFragmentManager.backStackEntryCount > 0) {
             childFragmentManager.popBackStack()
+            true
         } else {
-            parentFragmentManager.popBackStack()
+            false
         }
     }
 }
