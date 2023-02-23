@@ -38,8 +38,6 @@ class NewsContainerFragment : Fragment(), NestedFragment {
         return if (childFragmentManager.backStackEntryCount > 0) {
             childFragmentManager.popBackStack()
             true
-        } else {
-            false
-        }
+        } else false
     }
 }
