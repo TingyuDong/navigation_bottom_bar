@@ -23,9 +23,6 @@ class NewsDetailFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(NewsDetailViewModel::class.java)
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
-            parentFragmentManager.popBackStack()
-        }
     }
 
 }

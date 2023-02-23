@@ -48,15 +48,4 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
     }
 
-    override fun onBackPressed() {
-        val primaryNavigationFragment =
-            navHostFragment.childFragmentManager.primaryNavigationFragment
-        if (primaryNavigationFragment is NestedFragment) {
-            primaryNavigationFragment.onBackPressed()
-        } else {
-            super.onBackPressed()
-        }
-    }
-
-
 }

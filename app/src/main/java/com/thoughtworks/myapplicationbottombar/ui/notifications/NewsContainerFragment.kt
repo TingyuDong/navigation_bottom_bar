@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.thoughtworks.myapplicationbottombar.`interface`.NestedFragment
 import com.thoughtworks.myapplicationbottombar.databinding.FragmentNotificationsBinding
 
-class NewsContainerFragment : Fragment(), NestedFragment {
+class NewsContainerFragment : Fragment() {
 
     private var _binding: FragmentNotificationsBinding? = null
 
@@ -22,7 +22,7 @@ class NewsContainerFragment : Fragment(), NestedFragment {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        ViewModelProvider(this).get(NewsContainerViewModel::class.java)
+        ViewModelProvider(this)[NewsContainerViewModel::class.java]
 
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -35,11 +35,11 @@ class NewsContainerFragment : Fragment(), NestedFragment {
         _binding = null
     }
 
-    override fun onBackPressed() {
-        if (childFragmentManager.backStackEntryCount > 0) {
-            childFragmentManager.popBackStack()
-        } else {
-            parentFragmentManager.popBackStack()
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            if (childFragmentManager.backStackEntryCount > 0) childFragmentManager.popBackStack()
+            else if (parentFragmentManager.backStackEntryCount == 1) parentFragmentManager.popBackStack()
         }
     }
 }
