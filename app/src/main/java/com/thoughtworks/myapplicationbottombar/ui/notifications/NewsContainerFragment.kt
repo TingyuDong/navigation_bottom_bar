@@ -22,12 +22,11 @@ class NewsContainerFragment : Fragment(), NestedFragment {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        ViewModelProvider(this).get(NewsContainerViewModel::class.java)
+        ViewModelProvider(this)[NewsContainerViewModel::class.java]
 
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        return root
+        return binding.root
     }
 
     override fun onDestroyView() {
