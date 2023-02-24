@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
+        navController.backQueue.first().id
         navView.setupWithNavController(navController)
         navView.setOnItemSelectedListener {
             NavigationUI.onNavDestinationSelected(
@@ -52,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         val homeMenuItem = binding.navView.menu.findItem(R.id.navigation_home)
 
         if (!(current is NestedFragment && current.onBackPressed())) {
-            if (!homeMenuItem.isChecked
+            if (navController.currentBackStackEntry?.id != navController.backQueue.first().id
                 && navHostFragment.childFragmentManager.backStackEntryCount == 1
             ) {
                 NavigationUI.onNavDestinationSelected(
