@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
-    private lateinit var navHostFragment: NavHostFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,16 +43,29 @@ class MainActivity : AppCompatActivity() {
             )
             true
         }
-        navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
     }
 
     override fun onBackPressed() {
-        val primaryNavigationFragment =
-            navHostFragment.childFragmentManager.primaryNavigationFragment
-        if (!(primaryNavigationFragment is NestedFragment && primaryNavigationFragment.onBackPressed())) {
-            super.onBackPressed()
+        val navHostFragment = getCurrentFragment() as NavHostFragment
+        val current =
+            navHostFragment.childFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)
+        val homeMenuItem = binding.navView.menu.findItem(R.id.navigation_home)
+
+        if (!(current is NestedFragment && current.onBackPressed())) {
+            if (!homeMenuItem.isChecked
+                && navHostFragment.childFragmentManager.backStackEntryCount == 1
+            ) {
+                NavigationUI.onNavDestinationSelected(
+                    homeMenuItem,
+                    navController
+                )
+                homeMenuItem.isChecked = true
+            } else {
+                super.onBackPressed()
+            }
         }
     }
 
+    private fun getCurrentFragment() =
+        supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)
 }

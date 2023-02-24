@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.thoughtworks.myapplicationbottombar.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/home_navigate_to_my_book"
+            app:destination="@+id/navigation_my_books"/>
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -22,4 +26,10 @@
         android:name="com.thoughtworks.myapplicationbottombar.ui.notifications.NewsContainerFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_my_books"
+        android:name="com.thoughtworks.myapplicationbottombar.ui.mybooks.MyBooksFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_my_books" />
 </navigation>
