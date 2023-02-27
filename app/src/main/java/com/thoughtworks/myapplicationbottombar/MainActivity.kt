@@ -50,17 +50,11 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = getCurrentFragment() as NavHostFragment
         val current =
             navHostFragment.childFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)
-        val homeMenuItem = binding.navView.menu.findItem(R.id.navigation_home)
-
         if (!(current is NestedFragment && current.onBackPressed())) {
-            if (navController.currentBackStackEntry?.id != navController.backQueue.first().id
+            if (binding.navView.selectedItemId != navController.graph.startDestinationId
                 && navHostFragment.childFragmentManager.backStackEntryCount == 1
             ) {
-                NavigationUI.onNavDestinationSelected(
-                    homeMenuItem,
-                    navController
-                )
-                homeMenuItem.isChecked = true
+                binding.navView.selectedItemId = navController.graph.startDestinationId
             } else {
                 super.onBackPressed()
             }
