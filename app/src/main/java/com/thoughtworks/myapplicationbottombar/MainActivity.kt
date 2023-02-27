@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -47,18 +48,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        val navHostFragment = getCurrentFragment() as NavHostFragment
-        val current =
-            navHostFragment.childFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)
-        if (!(current is NestedFragment && current.onBackPressed())) {
-            if (binding.navView.selectedItemId != navController.graph.startDestinationId
-                && navHostFragment.childFragmentManager.backStackEntryCount == 1
-            ) {
-                binding.navView.selectedItemId = navController.graph.startDestinationId
-            } else {
-                super.onBackPressed()
-            }
+        if (onBackPressedHandled()) return
+
+        if (navController.backQueue.size == 1
+            && navController.currentDestination != navController.graph.findStartDestination()
+        ) {
+            binding.navView.selectedItemId = navController.graph.startDestinationId
         }
+        super.onBackPressed()
+    }
+
+    private fun onBackPressedHandled(): Boolean {
+        var current = getCurrentFragment()
+        if (current is NestedFragment && current.onBackPressed()) {
+            return true
+        }
+
+        val navHostFragment = getCurrentFragment() as NavHostFragment
+        current =
+            navHostFragment.childFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)
+        if (current is NestedFragment && current.onBackPressed()) {
+            return true
+        }
+        return false
     }
 
     private fun getCurrentFragment() =
