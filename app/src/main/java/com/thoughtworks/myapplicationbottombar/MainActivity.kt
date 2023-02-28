@@ -1,10 +1,10 @@
 package com.thoughtworks.myapplicationbottombar
 
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
-import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavGraph
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -17,7 +17,6 @@ import com.thoughtworks.myapplicationbottombar.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = binding.navView
 
-        navController = findNavController(R.id.nav_host_fragment_activity_main)
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
@@ -36,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
-        navController.backQueue.first().id
+
         navView.setupWithNavController(navController)
         navView.setOnItemSelectedListener {
             NavigationUI.onNavDestinationSelected(
@@ -47,30 +46,46 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        val navHostFragment = getCurrentFragment() as NavHostFragment
+        val navController = navHostFragment.navController
+        navController.addOnDestinationChangedListener { navc, destination, _ ->
+            onBackPressedCallback.isEnabled =
+                navc.backQueue.count { it.destination !is NavGraph } > 1
+            onBackPressedDispatcher.addCallback(onBackPressedCallback)
+        }
+
+    }
+
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            val menuList = listOf(
+                R.id.navigation_home,
+                R.id.navigation_dashboard,
+                R.id.navigation_notifications
+            )
+            val navHostFragment = getCurrentFragment() as NavHostFragment
+            val navController = navHostFragment.navController
+            if (menuList.contains(navController.currentDestination?.id)) {
+                binding.navView.selectedItemId = navController.graph.startDestinationId
+            } else {
+                navController.popBackStack()
+            }
+        }
+    }
+
     override fun onBackPressed() {
         if (onBackPressedHandled()) return
-
-        if (navController.backQueue.size == 1
-            && navController.currentDestination != navController.graph.findStartDestination()
-        ) {
-            binding.navView.selectedItemId = navController.graph.startDestinationId
-        }
         super.onBackPressed()
     }
 
     private fun onBackPressedHandled(): Boolean {
-        var current = getCurrentFragment()
-        if (current is NestedFragment && current.onBackPressed()) {
-            return true
-        }
-
-        val navHostFragment = getCurrentFragment() as NavHostFragment
-        current =
-            navHostFragment.childFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)
-        if (current is NestedFragment && current.onBackPressed()) {
-            return true
-        }
-        return false
+        val current = getCurrentFragment()
+        return (current as? NestedFragment)?.onBackPressed()
+            ?: ((current as? NavHostFragment)?.childFragmentManager
+                ?.findFragmentById(R.id.nav_host_fragment_activity_main) as? NestedFragment)
+                ?.onBackPressed() ?: false
     }
 
     private fun getCurrentFragment() =
