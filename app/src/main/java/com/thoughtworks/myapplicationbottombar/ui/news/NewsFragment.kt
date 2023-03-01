@@ -1,5 +1,6 @@
 package com.thoughtworks.myapplicationbottombar.ui.news
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,10 +19,12 @@ class NewsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        println("NewsFragment: onCreateView()")
         return inflater.inflate(R.layout.fragment_news, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        println("NewsFragment: onViewCreated()")
         super.onViewCreated(view, savedInstanceState)
         addBtnEvent(view)
     }
@@ -37,9 +40,53 @@ class NewsFragment : Fragment() {
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
+        println("NewsFragment: onActivityCreated()")
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(NewsViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
+    override fun onAttach(context: Context) {
+        println("NewsFragment: onAttach()")
+        super.onAttach(context)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        println("NewsFragment: onCreate()")
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onStart() {
+        println("NewsFragment: onStart()")
+        super.onStart()
+    }
+
+    override fun onResume() {
+        println("NewsFragment: onResume()")
+        super.onResume()
+    }
+
+    override fun onPause() {
+        println("NewsFragment: onPause()")
+        super.onPause()
+    }
+
+    override fun onStop() {
+        println("NewsFragment: onStop()")
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        println("NewsFragment: onDestroy()")
+        super.onDestroy()
+    }
+
+    override fun onDetach() {
+        println("NewsFragment: onDetach()")
+        super.onDetach()
+    }
+
+    override fun onDestroyView() {
+        println("NewsFragment: onDestroyView()")
+        super.onDestroyView()
+    }
 }

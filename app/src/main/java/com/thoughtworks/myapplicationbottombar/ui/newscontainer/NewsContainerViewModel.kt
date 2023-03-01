@@ -1,4 +1,4 @@
-package com.thoughtworks.myapplicationbottombar.ui.notifications
+package com.thoughtworks.myapplicationbottombar.ui.newscontainer
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

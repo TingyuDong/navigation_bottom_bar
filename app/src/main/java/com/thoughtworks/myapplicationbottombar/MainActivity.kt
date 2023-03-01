@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        println("Activity: onCreate()")
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_news
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -47,25 +48,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onStart() {
+        println("Activity: onStart()")
         super.onStart()
-        val navHostFragment = getCurrentFragment() as NavHostFragment
-        val navController = navHostFragment.navController
-        navController.addOnDestinationChangedListener { navc, destination, _ ->
-            onBackPressedCallback.isEnabled =
-                navc.backQueue.count { it.destination !is NavGraph } > 1
-            onBackPressedDispatcher.addCallback(onBackPressedCallback)
-        }
-
     }
 
     private val onBackPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
             val menuList = listOf(
-                R.id.navigation_home,
                 R.id.navigation_dashboard,
-                R.id.navigation_notifications
+                R.id.navigation_news
             )
-            val navHostFragment = getCurrentFragment() as NavHostFragment
+            val navHostFragment = getCurrentFragment()
             val navController = navHostFragment.navController
             if (menuList.contains(navController.currentDestination?.id)) {
                 binding.navView.selectedItemId = navController.graph.startDestinationId
@@ -81,13 +74,39 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onBackPressedHandled(): Boolean {
-        val current = getCurrentFragment()
-        return (current as? NestedFragment)?.onBackPressed()
-            ?: ((current as? NavHostFragment)?.childFragmentManager
+        return (getCurrentFragment() as? NestedFragment)?.onBackPressed()
+            ?: ((getCurrentFragment() as? NavHostFragment)?.childFragmentManager
                 ?.findFragmentById(R.id.nav_host_fragment_activity_main) as? NestedFragment)
                 ?.onBackPressed() ?: false
     }
 
     private fun getCurrentFragment() =
-        supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)
+        supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+
+    override fun onResume() {
+        println("Activity: onResume()")
+        super.onResume()
+        val navHostFragment = getCurrentFragment()
+        val navController = navHostFragment.navController
+        navController.addOnDestinationChangedListener { navigationController, _, _ ->
+            onBackPressedCallback.isEnabled =
+                navigationController.backQueue.count { it.destination !is NavGraph } > 1
+            onBackPressedDispatcher.addCallback(onBackPressedCallback)
+        }
+    }
+
+    override fun onPause() {
+        println("Activity: onPause()")
+        super.onPause()
+    }
+
+    override fun onStop() {
+        println("Activity: onStop()")
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        println("Activity: onDestroy()")
+        super.onDestroy()
+    }
 }
