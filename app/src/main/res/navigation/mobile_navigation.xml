@@ -22,10 +22,10 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.thoughtworks.myapplicationbottombar.ui.notifications.NewsContainerFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_news"
+        android:name="com.thoughtworks.myapplicationbottombar.ui.newscontainer.NewsContainerFragment"
+        android:label="@string/title_news"
+        tools:layout="@layout/fragment_news_container" />
 
     <fragment
         android:id="@+id/navigation_my_books"
