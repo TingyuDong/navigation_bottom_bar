@@ -9,7 +9,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:text="@string/this_is_news_detail"
         android:layout_marginStart="50dp"
-        android:text="@string/news_detail" />
+        android:textSize="40sp"/>
 
 </FrameLayout>

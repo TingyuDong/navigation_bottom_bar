@@ -8,4 +8,6 @@
     <string name="this_is_my_books">This is my Books</string>
     <string name="news">News</string>
     <string name="news_detail">News Detail</string>
+    <string name="this_is_news">This is news</string>
+    <string name="this_is_news_detail">This is newsDetail</string>
 </resources>

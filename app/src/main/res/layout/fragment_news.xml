@@ -10,8 +10,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="180dp"
-        android:text="@string/news" />
+        android:text="@string/this_is_news"
+        android:layout_marginStart="90dp"
+        android:textSize="40sp"/>
 
     <Button
         android:id="@+id/btn_news_detail"
