@@ -1,13 +1,15 @@
 package com.thoughtworks.myapplicationbottombar.ui.mybooks
 
 import android.content.Context
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.thoughtworks.myapplicationbottombar.R
+import com.thoughtworks.myapplicationbottombar.ui.innerfragmentcontainer.InnerFragmentContainer
 
 class MyBooksFragment : Fragment() {
 
@@ -76,5 +78,18 @@ class MyBooksFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         println("MyBooksFragment: onViewCreated()")
         super.onViewCreated(view, savedInstanceState)
+        // addBtnEvent(view)
+    }
+
+    private fun addBtnEvent(view: View) {
+        view.findViewById<Button>(R.id.btn_my_notes).setOnClickListener {
+            println("activity supportFragmentManager" + activity?.supportFragmentManager)
+            println("parent FragmentManager$parentFragmentManager")
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.add(R.id.nav_host_fragment_activity_main, InnerFragmentContainer())
+                ?.addToBackStack("home")
+                ?.setReorderingAllowed(true)
+                ?.commit()
+        }
     }
 }

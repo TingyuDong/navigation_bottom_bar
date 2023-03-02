@@ -5,6 +5,7 @@
     <string name="title_news">news</string>
     <string name="my_notes">My Notes</string>
     <string name="my_books">My Books</string>
+    <string name="this_is_my_books">This is my Books</string>
     <string name="news">News</string>
     <string name="news_detail">News Detail</string>
 </resources>

@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_dashboard,
                 R.id.navigation_news
             )
-            val navHostFragment = getCurrentFragment()
+            val navHostFragment = getCurrentFragment() as NavHostFragment
             val navController = navHostFragment.navController
             if (menuList.contains(navController.currentDestination?.id)) {
                 binding.navView.selectedItemId = navController.graph.startDestinationId
@@ -81,13 +81,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getCurrentFragment() =
-        supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+        supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)
 
     override fun onResume() {
         println("Activity: onResume()")
         super.onResume()
-        val navHostFragment = getCurrentFragment()
+        val navHostFragment = getCurrentFragment() as NavHostFragment
         val navController = navHostFragment.navController
+        println("nav childFragmentManager" + navHostFragment.childFragmentManager)
+        println("nav parentFragmentManager" + navHostFragment.parentFragmentManager)
+
         navController.addOnDestinationChangedListener { navigationController, _, _ ->
             onBackPressedCallback.isEnabled =
                 navigationController.backQueue.count { it.destination !is NavGraph } > 1
