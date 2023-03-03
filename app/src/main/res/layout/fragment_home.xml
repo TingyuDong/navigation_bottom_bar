@@ -8,10 +8,10 @@
     android:background="#f0a1a8">
 
     <Button
-        android:id="@+id/btn_news_detail"
+        android:id="@+id/btn_my_notes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/my_books"
+        android:text="@string/my_notes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

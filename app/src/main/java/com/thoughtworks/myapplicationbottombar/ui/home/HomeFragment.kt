@@ -9,9 +9,9 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import com.thoughtworks.myapplicationbottombar.R
 import com.thoughtworks.myapplicationbottombar.databinding.FragmentHomeBinding
+import com.thoughtworks.myapplicationbottombar.ui.innerfragmentcontainer.InnerFragmentContainer
 
 class HomeFragment : Fragment() {
 
@@ -47,8 +47,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun addBtnEvent() {
-        view?.findViewById<Button>(R.id.btn_news_detail)?.setOnClickListener {
-            it.findNavController().navigate(R.id.navigation_my_books)
+        view?.findViewById<Button>(R.id.btn_my_notes)?.setOnClickListener {
+            activity?.supportFragmentManager?.run {
+                beginTransaction()
+                    .add(R.id.nav_host_fragment_activity_main, InnerFragmentContainer::class.java, Bundle())
+                    .addToBackStack("home")
+                    .commit()
+            }
         }
     }
 

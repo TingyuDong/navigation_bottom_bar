@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.dashboard.DashboardFragment"
-    android:background="@color/design_default_color_primary_variant">
+    android:background="@color/design_default_color_primary_variant"
+    android:layout_marginTop="200dp">
 
     <TextView
         android:id="@+id/text_dashboard"

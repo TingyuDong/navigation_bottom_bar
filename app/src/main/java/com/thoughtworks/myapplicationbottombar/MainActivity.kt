@@ -5,7 +5,6 @@ import androidx.activity.OnBackPressedCallback
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavGraph
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -27,7 +26,8 @@ class MainActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = binding.navView
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        val navHostFragment = getCurrentFragment() as NavHostFragment
+        val navController = navHostFragment.navController
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
@@ -91,11 +91,13 @@ class MainActivity : AppCompatActivity() {
         println("nav childFragmentManager" + navHostFragment.childFragmentManager)
         println("nav parentFragmentManager" + navHostFragment.parentFragmentManager)
 
+
+        onBackPressedDispatcher.addCallback(onBackPressedCallback)
         navController.addOnDestinationChangedListener { navigationController, _, _ ->
             onBackPressedCallback.isEnabled =
-                navigationController.backQueue.count { it.destination !is NavGraph } > 1
-            onBackPressedDispatcher.addCallback(onBackPressedCallback)
+                navigationController.backQueue.count { it.destination !is NavGraph } == 1
         }
+
     }
 
     override fun onPause() {

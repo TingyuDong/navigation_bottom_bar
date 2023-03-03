@@ -78,18 +78,20 @@ class MyBooksFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         println("MyBooksFragment: onViewCreated()")
         super.onViewCreated(view, savedInstanceState)
-        // addBtnEvent(view)
+        addBtnEvent(view)
     }
 
     private fun addBtnEvent(view: View) {
         view.findViewById<Button>(R.id.btn_my_notes).setOnClickListener {
-            println("activity supportFragmentManager" + activity?.supportFragmentManager)
+            println("activity supportFragmentManager " + activity?.supportFragmentManager)
             println("parent FragmentManager$parentFragmentManager")
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.add(R.id.nav_host_fragment_activity_main, InnerFragmentContainer())
-                ?.addToBackStack("home")
-                ?.setReorderingAllowed(true)
-                ?.commit()
+            activity?.supportFragmentManager?.run {
+                beginTransaction()
+                    .add(R.id.nav_host_fragment_activity_main, InnerFragmentContainer::class.java, Bundle())
+                    .addToBackStack("home")
+                    // ?.setReorderingAllowed(true)
+                    .commit()
+            }
         }
     }
 }

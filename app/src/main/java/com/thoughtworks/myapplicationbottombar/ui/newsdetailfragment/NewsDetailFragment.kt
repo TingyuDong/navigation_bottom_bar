@@ -1,7 +1,6 @@
 package com.thoughtworks.myapplicationbottombar.ui.newsdetailfragment
 
 import android.content.Context
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,13 +20,23 @@ class NewsDetailFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_news_detail, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        println("NewsDetailFragment: onActivityCreated()")
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(NewsDetailViewModel::class.java)
-//        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
-//            parentFragmentManager.popBackStack()
-//        }
+//     override fun onActivityCreated(savedInstanceState: Bundle?) {
+//         println("NewsDetailFragment: onActivityCreated()")
+//         super.onActivityCreated(savedInstanceState)
+//         viewModel = ViewModelProvider(this).get(NewsDetailViewModel::class.java)
+// //        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
+// //            parentFragmentManager.popBackStack()
+// //        }
+//     }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        println("NewsDetailFragment: onViewStateRestored()")
+        super.onViewStateRestored(savedInstanceState)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        println("NewsDetailFragment: onSaveInstanceState()")
+        super.onSaveInstanceState(outState)
     }
 
     override fun onAttach(context: Context) {

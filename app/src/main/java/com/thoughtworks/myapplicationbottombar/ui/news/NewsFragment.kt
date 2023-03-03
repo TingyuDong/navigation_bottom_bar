@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.thoughtworks.myapplicationbottombar.R
 import com.thoughtworks.myapplicationbottombar.ui.newsdetailfragment.NewsDetailFragment
 
@@ -39,11 +38,21 @@ class NewsFragment : Fragment() {
         }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        println("NewsFragment: onActivityCreated()")
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(NewsViewModel::class.java)
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        println("NewsFragment: onViewStateRestored()")
+        super.onViewStateRestored(savedInstanceState)
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        println("NewsFragment: onSaveInstanceState()")
+        super.onSaveInstanceState(outState)
+    }
+
+    // override fun onActivityCreated(savedInstanceState: Bundle?) {
+    //     println("NewsFragment: onActivityCreated()")
+    //     super.onActivityCreated(savedInstanceState)
+    //     viewModel = ViewModelProvider(this).get(NewsViewModel::class.java)
+    // }
 
     override fun onAttach(context: Context) {
         println("NewsFragment: onAttach()")

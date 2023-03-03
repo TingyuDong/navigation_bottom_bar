@@ -24,6 +24,7 @@ class InnerFragmentContainer : Fragment(), NestedFragment {
         savedInstanceState: Bundle?
     ): View? {
         println("InnerFragmentContainer parent fragmentManager$parentFragmentManager")
+        println("InnerFragmentContainer child fragmentManager$childFragmentManager")
         return inflater.inflate(R.layout.fragment_inner_fragment_container, container, false)
     }
 
@@ -34,14 +35,27 @@ class InnerFragmentContainer : Fragment(), NestedFragment {
     }
 
     override fun onBackPressed(): Boolean {
-        return if (childFragmentManager.backStackEntryCount > 0) {
-            childFragmentManager.popBackStack()
+        val navHostFragment = childFragmentManager.findFragmentById(R.id.inner_fragment) as NavHostFragment
+        return if (navHostFragment.childFragmentManager.backStackEntryCount > 0) {
+            navHostFragment.childFragmentManager.popBackStack()
             true
         } else false
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onStart() {
+        super.onStart()
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
 }
