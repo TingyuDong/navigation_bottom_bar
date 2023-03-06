@@ -79,7 +79,10 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         println("Activity: onResume()")
         super.onResume()
-        val navHostFragment = getCurrentFragment() as NavHostFragment
+        setBackPressedCallback()
+    }
+
+    private fun setBackPressedCallback() {
         val navController = navHostFragment.navController
         onBackPressedDispatcher.addCallback(onBackPressedCallback)
         navController.addOnDestinationChangedListener { navigationController, _, _ ->
@@ -109,7 +112,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onBackPressedHandled(): Boolean {
-        return (getCurrentFragment() as? InnerContainerFragment)?.onBackPressed()
+        return (getCurrentFragment() as? NestedFragment)?.onBackPressed()
             ?: (navHostFragment.childFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as? NestedFragment)?.onBackPressed()
             ?: false
     }
