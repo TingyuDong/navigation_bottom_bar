@@ -13,10 +13,6 @@ import com.thoughtworks.myapplicationbottombar.`interface`.NestedFragment
 
 class InnerContainerFragment : Fragment(), NestedFragment {
 
-    companion object {
-        fun newInstance() = InnerContainerFragment()
-    }
-
     private lateinit var viewModel: InnerContainerFragmentViewModel
 
     override fun onCreateView(
@@ -34,15 +30,29 @@ class InnerContainerFragment : Fragment(), NestedFragment {
     }
 
     override fun onBackPressed(): Boolean {
-        val navHostFragment = childFragmentManager.findFragmentById(R.id.inner_fragment) as NavHostFragment
+        return if (onBackPressedHandled()) true
+        else {
+            handleOnBackPressed()
+        }
+    }
 
+    private fun handleOnBackPressed(): Boolean {
+        val navHostFragment = getCurrentFragment() as NavHostFragment
         val navController = navHostFragment.navController
-        return if (this.isVisible && navController.backQueue.count { it.destination !is NavGraph } > 1) {
+        return if (navController.backQueue.count { it.destination !is NavGraph } > 1) {
             navController.popBackStack()
         } else {
             false
         }
     }
+
+    private fun onBackPressedHandled(): Boolean {
+        return (getCurrentFragment() as? NestedFragment)?.onBackPressed()
+            ?: ((getCurrentFragment() as? NavHostFragment)?.childFragmentManager?.findFragmentById(R.id.inner_fragment) as? NestedFragment)?.onBackPressed()
+            ?: false
+    }
+
+    private fun getCurrentFragment() = childFragmentManager.findFragmentById(R.id.inner_fragment)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         println("InnerContainerFragment: onViewCreated()")
