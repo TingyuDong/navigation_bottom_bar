@@ -17,5 +17,14 @@
         android:id="@+id/newsContainerFragment"
         android:name="com.thoughtworks.myapplicationbottombar.ui.newscontainer.NewsContainerFragment"
         android:label="fragment_news_container"
-        tools:layout="@layout/fragment_news_container" />
+        tools:layout="@layout/fragment_news_container" >
+        <action
+            android:id="@+id/action_newsContainerFragment_to_mathFragment"
+            app:destination="@id/mathFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mathFragment"
+        android:name="com.thoughtworks.myapplicationbottombar.ui.math.MathFragment"
+        android:label="fragment_math"
+        tools:layout="@layout/fragment_math" />
 </navigation>

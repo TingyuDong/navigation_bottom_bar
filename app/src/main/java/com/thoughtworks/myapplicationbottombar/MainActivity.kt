@@ -13,7 +13,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.thoughtworks.myapplicationbottombar.`interface`.NestedFragment
 import com.thoughtworks.myapplicationbottombar.databinding.ActivityMainBinding
-import com.thoughtworks.myapplicationbottombar.ui.innerfragmentcontainer.InnerContainerFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -49,22 +48,6 @@ class MainActivity : AppCompatActivity() {
         navController: NavController
     ) {
         navView.setOnItemSelectedListener {
-            val menuList = listOf(
-                R.id.navigation_dashboard,
-                R.id.navigation_news
-            )
-            (getCurrentFragment() as? InnerContainerFragment)?.run {
-                if (menuList.contains(it.itemId)) {
-                    supportFragmentManager.beginTransaction()
-                        .hide(this)
-                        .commit()
-                } else {
-                    supportFragmentManager.beginTransaction()
-                        .show(this)
-                        .commit()
-                }
-            }
-
             NavigationUI.onNavDestinationSelected(
                 it,
                 navController
