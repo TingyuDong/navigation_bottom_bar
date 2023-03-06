@@ -9,7 +9,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.thoughtworks.myapplicationbottombar.R
-import com.thoughtworks.myapplicationbottombar.ui.innerfragmentcontainer.InnerContainerFragment
+import com.thoughtworks.myapplicationbottombar.ui.innercontainerfragment.InnerContainerFragment
 
 class MyBooksFragment : Fragment() {
 

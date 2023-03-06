@@ -37,6 +37,6 @@
         tools:layout="@layout/fragment_my_books" />
     <fragment
         android:id="@+id/innerContainerFragment"
-        android:name="com.thoughtworks.myapplicationbottombar.ui.innerfragmentcontainer.InnerContainerFragment"
+        android:name="com.thoughtworks.myapplicationbottombar.ui.innercontainerfragment.InnerContainerFragment"
         android:label="InnerContainerFragment" />
 </navigation>
