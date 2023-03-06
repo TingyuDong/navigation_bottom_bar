@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.thoughtworks.myapplicationbottombar.R
 import com.thoughtworks.myapplicationbottombar.databinding.FragmentHomeBinding
-import com.thoughtworks.myapplicationbottombar.ui.innerfragmentcontainer.InnerFragmentContainer
+import com.thoughtworks.myapplicationbottombar.ui.innerfragmentcontainer.InnerContainerFragment
 
 class HomeFragment : Fragment() {
 
@@ -50,7 +50,7 @@ class HomeFragment : Fragment() {
         view?.findViewById<Button>(R.id.btn_my_notes)?.setOnClickListener {
             activity?.supportFragmentManager?.run {
                 beginTransaction()
-                    .add(R.id.nav_host_fragment_activity_main, InnerFragmentContainer::class.java, Bundle())
+                    .add(R.id.nav_host_fragment_activity_main, InnerContainerFragment::class.java, Bundle())
                     .addToBackStack("home")
                     .commit()
             }

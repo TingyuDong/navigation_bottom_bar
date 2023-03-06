@@ -9,7 +9,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.thoughtworks.myapplicationbottombar.R
-import com.thoughtworks.myapplicationbottombar.ui.innerfragmentcontainer.InnerFragmentContainer
+import com.thoughtworks.myapplicationbottombar.ui.innerfragmentcontainer.InnerContainerFragment
 
 class MyBooksFragment : Fragment() {
 
@@ -87,8 +87,8 @@ class MyBooksFragment : Fragment() {
             println("parent FragmentManager$parentFragmentManager")
             activity?.supportFragmentManager?.run {
                 beginTransaction()
-                    .add(R.id.nav_host_fragment_activity_main, InnerFragmentContainer::class.java, Bundle())
-                    .addToBackStack("home")
+                    .add(R.id.nav_host_fragment_activity_main, InnerContainerFragment::class.java, Bundle())
+                    .addToBackStack("my notes")
                     // ?.setReorderingAllowed(true)
                     .commit()
             }

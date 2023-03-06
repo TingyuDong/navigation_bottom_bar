@@ -6,26 +6,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
 import com.thoughtworks.myapplicationbottombar.R
 import com.thoughtworks.myapplicationbottombar.`interface`.NestedFragment
 
-class InnerFragmentContainer : Fragment(), NestedFragment {
+class InnerContainerFragment : Fragment(), NestedFragment {
 
     companion object {
-        fun newInstance() = InnerFragmentContainer()
+        fun newInstance() = InnerContainerFragment()
     }
 
     private lateinit var viewModel: InnerFragmentContainerViewModel
-    private lateinit var navHostFragment: NavHostFragment
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        println("InnerFragmentContainer parent fragmentManager$parentFragmentManager")
-        println("InnerFragmentContainer child fragmentManager$childFragmentManager")
-        return inflater.inflate(R.layout.fragment_inner_fragment_container, container, false)
+        println("InnerContainerFragment: onCreateView()")
+        return inflater.inflate(R.layout.fragment_inner_container_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -36,25 +35,33 @@ class InnerFragmentContainer : Fragment(), NestedFragment {
 
     override fun onBackPressed(): Boolean {
         val navHostFragment = childFragmentManager.findFragmentById(R.id.inner_fragment) as NavHostFragment
-        return if (navHostFragment.childFragmentManager.backStackEntryCount > 0) {
-            navHostFragment.childFragmentManager.popBackStack()
-            true
-        } else false
+
+        val navController = navHostFragment.navController
+        if (navController.backQueue.count { it.destination !is NavGraph } > 1) {
+            navController.popBackStack()
+        } else {
+            parentFragmentManager.popBackStack()
+        }
+        return true
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        println("InnerContainerFragment: onViewCreated()")
         super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onStart() {
+        println("InnerContainerFragment: onStart()")
         super.onStart()
     }
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        println("InnerContainerFragment: onViewStateRestored()")
         super.onViewStateRestored(savedInstanceState)
     }
 
     override fun onResume() {
+        println("InnerContainerFragment: onResume()")
         super.onResume()
     }
 
