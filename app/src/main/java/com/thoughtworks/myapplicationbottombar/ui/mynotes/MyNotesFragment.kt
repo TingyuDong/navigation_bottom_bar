@@ -35,8 +35,8 @@ class MyNotesFragment : Fragment() {
     }
 
     private fun addBtnEvent() {
-        view?.findViewById<Button>(R.id.btn_my_notes)?.setOnClickListener {
-            findNavController().navigate(R.id.newsContainerFragment)
+        view?.findViewById<Button>(R.id.btn_select_item)?.setOnClickListener {
+            findNavController().navigate(R.id.selectItemFragment)
         }
     }
 

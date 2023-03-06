@@ -10,21 +10,21 @@
         android:name="com.thoughtworks.myapplicationbottombar.ui.mynotes.MyNotesFragment"
         android:label="MyNotesFragment" >
         <action
-            android:id="@+id/action_myNotesFragment_to_newsContainerFragment"
-            app:destination="@id/newsContainerFragment" />
+            android:id="@+id/action_myNotesFragment_to_selectItemFragment"
+            app:destination="@id/selectItemFragment" />
     </fragment>
     <fragment
         android:id="@+id/newsContainerFragment"
         android:name="com.thoughtworks.myapplicationbottombar.ui.newscontainer.NewsContainerFragment"
         android:label="fragment_news_container"
-        tools:layout="@layout/fragment_news_container" >
-        <action
-            android:id="@+id/action_newsContainerFragment_to_mathFragment"
-            app:destination="@id/mathFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_news_container" />
     <fragment
-        android:id="@+id/mathFragment"
-        android:name="com.thoughtworks.myapplicationbottombar.ui.math.MathFragment"
+        android:id="@+id/selectItemFragment"
+        android:name="com.thoughtworks.myapplicationbottombar.ui.selectitemfragment.SelectItemFragment"
         android:label="fragment_math"
-        tools:layout="@layout/fragment_math" />
+        tools:layout="@layout/fragment_select_item" >
+        <action
+            android:id="@+id/action_selectItemFragment_to_newsContainerFragment"
+            app:destination="@id/newsContainerFragment" />
+    </fragment>
 </navigation>
