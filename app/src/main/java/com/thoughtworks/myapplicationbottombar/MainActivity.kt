@@ -17,6 +17,7 @@ import com.thoughtworks.myapplicationbottombar.ui.innerfragmentcontainer.InnerCo
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var navHostFragment: NavHostFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         println("Activity: onCreate()")
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = binding.navView
 
-        val navHostFragment = getCurrentFragment() as NavHostFragment
+        navHostFragment = getCurrentFragment() as NavHostFragment
         val navController = navHostFragment.navController
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -44,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_dashboard,
                 R.id.navigation_news
             )
-            (supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as? InnerContainerFragment)?.run {
+            (getCurrentFragment() as? InnerContainerFragment)?.run {
                 if (menuList.contains(it.itemId)) {
                     supportFragmentManager.beginTransaction()
                         .hide(this)
@@ -75,7 +76,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_dashboard,
                 R.id.navigation_news
             )
-            val navHostFragment = getCurrentFragment() as NavHostFragment
             val navController = navHostFragment.navController
             if (menuList.contains(navController.currentDestination?.id)) {
                 binding.navView.selectedItemId = navController.graph.startDestinationId
@@ -91,10 +91,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onBackPressedHandled(): Boolean {
-        return (getCurrentFragment() as? NestedFragment)?.onBackPressed()
-            ?: ((getCurrentFragment() as? NavHostFragment)?.childFragmentManager
-                ?.findFragmentById(R.id.nav_host_fragment_activity_main) as? NestedFragment)
-                ?.onBackPressed() ?: false
+        return (getCurrentFragment() as? InnerContainerFragment)?.run {
+            if (this.isVisible) onBackPressed()
+            else {
+                (navHostFragment.childFragmentManager
+                    .findFragmentById(R.id.nav_host_fragment_activity_main) as? NestedFragment)?.onBackPressed() ?: false
+            }
+        } ?: false
     }
 
     private fun getCurrentFragment() =
