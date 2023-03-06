@@ -12,6 +12,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.thoughtworks.myapplicationbottombar.`interface`.NestedFragment
 import com.thoughtworks.myapplicationbottombar.databinding.ActivityMainBinding
+import com.thoughtworks.myapplicationbottombar.ui.innerfragmentcontainer.InnerContainerFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,6 +40,23 @@ class MainActivity : AppCompatActivity() {
 
         navView.setupWithNavController(navController)
         navView.setOnItemSelectedListener {
+            val menuList = listOf(
+                R.id.navigation_dashboard,
+                R.id.navigation_news
+            )
+            (supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as? InnerContainerFragment)?.run {
+                if (menuList.contains(it.itemId)) {
+                    supportFragmentManager.beginTransaction()
+                        .hide(this)
+                        .commit()
+                } else {
+                    supportFragmentManager.beginTransaction()
+                        .show(this)
+                        .commit()
+                }
+            }
+
+
             NavigationUI.onNavDestinationSelected(
                 it,
                 navController
@@ -88,14 +106,10 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         val navHostFragment = getCurrentFragment() as NavHostFragment
         val navController = navHostFragment.navController
-        println("nav childFragmentManager" + navHostFragment.childFragmentManager)
-        println("nav parentFragmentManager" + navHostFragment.parentFragmentManager)
-
-
         onBackPressedDispatcher.addCallback(onBackPressedCallback)
         navController.addOnDestinationChangedListener { navigationController, _, _ ->
             onBackPressedCallback.isEnabled =
-                navigationController.backQueue.count { it.destination !is NavGraph } == 1
+                navigationController.backQueue.count { it.destination !is NavGraph } > 1
         }
 
     }
