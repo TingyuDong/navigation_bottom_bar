@@ -56,7 +56,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-
             NavigationUI.onNavDestinationSelected(
                 it,
                 navController
@@ -111,7 +110,6 @@ class MainActivity : AppCompatActivity() {
             onBackPressedCallback.isEnabled =
                 navigationController.backQueue.count { it.destination !is NavGraph } > 1
         }
-
     }
 
     override fun onPause() {
