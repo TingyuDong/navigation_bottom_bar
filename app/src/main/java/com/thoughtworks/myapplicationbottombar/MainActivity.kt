@@ -62,10 +62,10 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         println("Activity: onResume()")
         super.onResume()
-        setBackPressedCallback()
+        setOnBackPressedCallback()
     }
 
-    private fun setBackPressedCallback() {
+    private fun setOnBackPressedCallback() {
         val navController = navHostFragment.navController
         onBackPressedDispatcher.addCallback(onBackPressedCallback)
         navController.addOnDestinationChangedListener { navigationController, _, _ ->
