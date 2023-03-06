@@ -37,12 +37,11 @@ class InnerContainerFragment : Fragment(), NestedFragment {
         val navHostFragment = childFragmentManager.findFragmentById(R.id.inner_fragment) as NavHostFragment
 
         val navController = navHostFragment.navController
-        if (navController.backQueue.count { it.destination !is NavGraph } > 1) {
+        return if (this.isVisible && navController.backQueue.count { it.destination !is NavGraph } > 1) {
             navController.popBackStack()
         } else {
-            parentFragmentManager.popBackStack()
+            false
         }
-        return true
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -109,13 +109,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onBackPressedHandled(): Boolean {
-        return (getCurrentFragment() as? InnerContainerFragment)?.run {
-            if (this.isVisible) onBackPressed()
-            else {
-                (navHostFragment.childFragmentManager
-                    .findFragmentById(R.id.nav_host_fragment_activity_main) as? NestedFragment)?.onBackPressed() ?: false
-            }
-        } ?: false
+        return (getCurrentFragment() as? InnerContainerFragment)?.onBackPressed()
+            ?: (navHostFragment.childFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as? NestedFragment)?.onBackPressed()
+            ?: false
     }
 
     override fun onStart() {
