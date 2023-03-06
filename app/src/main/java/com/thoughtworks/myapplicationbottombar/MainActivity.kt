@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -40,6 +41,13 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         navView.setupWithNavController(navController)
+        setItemSelectedListener(navView, navController)
+    }
+
+    private fun setItemSelectedListener(
+        navView: BottomNavigationView,
+        navController: NavController
+    ) {
         navView.setOnItemSelectedListener {
             val menuList = listOf(
                 R.id.navigation_dashboard,
@@ -65,9 +73,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onStart() {
-        println("Activity: onStart()")
-        super.onStart()
+    private fun getCurrentFragment() =
+        supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)
+
+    override fun onResume() {
+        println("Activity: onResume()")
+        super.onResume()
+        val navHostFragment = getCurrentFragment() as NavHostFragment
+        val navController = navHostFragment.navController
+        onBackPressedDispatcher.addCallback(onBackPressedCallback)
+        navController.addOnDestinationChangedListener { navigationController, _, _ ->
+            onBackPressedCallback.isEnabled =
+                navigationController.backQueue.count { it.destination !is NavGraph } > 1
+        }
     }
 
     private val onBackPressedCallback = object : OnBackPressedCallback(true) {
@@ -100,19 +118,9 @@ class MainActivity : AppCompatActivity() {
         } ?: false
     }
 
-    private fun getCurrentFragment() =
-        supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)
-
-    override fun onResume() {
-        println("Activity: onResume()")
-        super.onResume()
-        val navHostFragment = getCurrentFragment() as NavHostFragment
-        val navController = navHostFragment.navController
-        onBackPressedDispatcher.addCallback(onBackPressedCallback)
-        navController.addOnDestinationChangedListener { navigationController, _, _ ->
-            onBackPressedCallback.isEnabled =
-                navigationController.backQueue.count { it.destination !is NavGraph } > 1
-        }
+    override fun onStart() {
+        println("Activity: onStart()")
+        super.onStart()
     }
 
     override fun onPause() {
