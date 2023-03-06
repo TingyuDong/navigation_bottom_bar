@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.navigation.fragment.findNavController
 import com.thoughtworks.myapplicationbottombar.R
 
 class MyNotesFragment : Fragment() {
@@ -25,14 +27,23 @@ class MyNotesFragment : Fragment() {
         println("MyNotesFragment: onActivityCreated")
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(MyNotesViewModel::class.java)
-        // TODO: Use the ViewModel
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        addBtnEvent()
+    }
+
+    private fun addBtnEvent() {
+        view?.findViewById<Button>(R.id.btn_my_notes)?.setOnClickListener {
+            findNavController().navigate(R.id.mathFragment)
+        }
     }
 
     override fun onResume() {
         println("MyNotesFragment: onResume")
         super.onResume()
     }
-
 
     override fun onDestroyView() {
         println("MyNotesFragment: onDestroyView()")
