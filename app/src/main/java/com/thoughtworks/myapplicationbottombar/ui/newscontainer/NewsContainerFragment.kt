@@ -66,8 +66,6 @@ class NewsContainerFragment : Fragment(), NestedFragment {
 
     override fun onResume() {
         println("NewsContainerFragment: onResume()")
-        println("NewsContainerFragment parent FragmentManager$parentFragmentManager")
-        println("NewsContainerFragment parent FragmentManager${parentFragmentManager.backStackEntryCount}")
         super.onResume()
     }
 

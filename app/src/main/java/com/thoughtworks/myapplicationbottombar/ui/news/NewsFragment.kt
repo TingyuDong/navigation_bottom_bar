@@ -48,12 +48,6 @@ class NewsFragment : Fragment() {
         super.onSaveInstanceState(outState)
     }
 
-    // override fun onActivityCreated(savedInstanceState: Bundle?) {
-    //     println("NewsFragment: onActivityCreated()")
-    //     super.onActivityCreated(savedInstanceState)
-    //     viewModel = ViewModelProvider(this).get(NewsViewModel::class.java)
-    // }
-
     override fun onAttach(context: Context) {
         println("NewsFragment: onAttach()")
         super.onAttach(context)
