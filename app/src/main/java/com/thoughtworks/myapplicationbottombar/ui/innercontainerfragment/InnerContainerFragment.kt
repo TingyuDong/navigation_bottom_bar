@@ -17,7 +17,7 @@ class InnerContainerFragment : Fragment(), NestedFragment {
         fun newInstance() = InnerContainerFragment()
     }
 
-    private lateinit var viewModel: InnerFragmentContainerViewModel
+    private lateinit var viewModel: InnerContainerFragmentViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +29,7 @@ class InnerContainerFragment : Fragment(), NestedFragment {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(InnerFragmentContainerViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(InnerContainerFragmentViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

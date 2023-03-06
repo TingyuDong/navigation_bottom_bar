@@ -2,6 +2,6 @@ package com.thoughtworks.myapplicationbottombar.ui.innercontainerfragment
 
 import androidx.lifecycle.ViewModel
 
-class InnerFragmentContainerViewModel : ViewModel() {
+class InnerContainerFragmentViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 }
