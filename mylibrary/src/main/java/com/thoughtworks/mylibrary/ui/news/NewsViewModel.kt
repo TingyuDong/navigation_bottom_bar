@@ -1,4 +1,4 @@
-package com.thoughtworks.myapplicationbottombar.ui.news
+package com.thoughtworks.mylibrary.ui.news
 
 import androidx.lifecycle.ViewModel
 
