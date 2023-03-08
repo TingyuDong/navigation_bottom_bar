@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.thoughtworks.myapplicationbottombar.ui.mynotes.MyNotesViewModel
 import com.thoughtworks.mylibrary.R
 import com.thoughtworks.mylibrary.databinding.FragmentMyNotesBinding
 

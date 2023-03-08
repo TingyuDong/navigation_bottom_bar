@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.thoughtworks.myapplicationbottombar.ui.selectitemfragment.SelectItemViewModel
 import com.thoughtworks.mylibrary.R
 import com.thoughtworks.mylibrary.databinding.FragmentSelectItemBinding
 
@@ -41,7 +40,7 @@ class SelectItemFragment : Fragment() {
 
     private fun addBtnEvent() {
         binding.btnNews.setOnClickListener {
-            findNavController().navigate(R.id.newsContainerFragment)
+            findNavController().navigate(R.id.action_selectItemFragment_to_newsContainerFragment)
         }
     }
 

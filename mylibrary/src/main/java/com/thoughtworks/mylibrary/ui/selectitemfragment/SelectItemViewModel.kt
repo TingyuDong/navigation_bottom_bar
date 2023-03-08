@@ -1,4 +1,4 @@
-package com.thoughtworks.myapplicationbottombar.ui.selectitemfragment
+package com.thoughtworks.mylibrary.ui.selectitemfragment
 
 import androidx.lifecycle.ViewModel
 

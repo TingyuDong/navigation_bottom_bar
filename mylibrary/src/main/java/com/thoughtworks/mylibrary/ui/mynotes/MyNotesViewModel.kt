@@ -1,4 +1,4 @@
-package com.thoughtworks.myapplicationbottombar.ui.mynotes
+package com.thoughtworks.mylibrary.ui.mynotes
 
 import androidx.lifecycle.ViewModel
 
