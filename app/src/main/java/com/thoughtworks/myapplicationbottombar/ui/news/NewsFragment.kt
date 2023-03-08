@@ -5,31 +5,36 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.thoughtworks.myapplicationbottombar.R
 import com.thoughtworks.myapplicationbottombar.ui.newsdetailfragment.NewsDetailFragment
+import com.thoughtworks.mylibrary.databinding.FragmentNewsBinding
 
 class NewsFragment : Fragment() {
 
-    private lateinit var viewModel: NewsViewModel
+    private var _binding: FragmentNewsBinding? = null
+
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         println("NewsFragment: onCreateView()")
-        return inflater.inflate(R.layout.fragment_news, container, false)
+        _binding = FragmentNewsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         println("NewsFragment: onViewCreated()")
         super.onViewCreated(view, savedInstanceState)
-        addBtnEvent(view)
+        addBtnEvent()
     }
 
-    private fun addBtnEvent(view: View) {
-        view.findViewById<Button>(R.id.btn_news_detail).setOnClickListener {
+    private fun addBtnEvent() {
+        binding.btnNewsDetail.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.notifications_child_fragment, NewsDetailFragment())
                 .addToBackStack("Notifications")

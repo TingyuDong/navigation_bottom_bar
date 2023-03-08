@@ -7,11 +7,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import com.thoughtworks.myapplicationbottombar.R
+import com.thoughtworks.myapplicationbottombar.databinding.FragmentMyNotesBinding
 
 class MyNotesFragment : Fragment() {
+
+    private var _binding: FragmentMyNotesBinding? = null
+
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     private lateinit var viewModel: MyNotesViewModel
 
@@ -20,6 +26,7 @@ class MyNotesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         println("MyNotesFragment: onCreateView")
+        _binding = FragmentMyNotesBinding.inflate(inflater, container, false)
         return inflater.inflate(R.layout.fragment_my_notes, container, false)
     }
 
@@ -35,7 +42,7 @@ class MyNotesFragment : Fragment() {
     }
 
     private fun addBtnEvent() {
-        view?.findViewById<Button>(R.id.btn_select_item)?.setOnClickListener {
+        binding.btnSelectItem.setOnClickListener {
             findNavController().navigate(R.id.selectItemFragment)
         }
     }

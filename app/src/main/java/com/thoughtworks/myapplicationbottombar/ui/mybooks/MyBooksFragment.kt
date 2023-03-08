@@ -5,22 +5,29 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.thoughtworks.myapplicationbottombar.R
-import com.thoughtworks.myapplicationbottombar.ui.innercontainerfragment.InnerContainerFragment
+import com.thoughtworks.myapplicationbottombar.databinding.FragmentHomeBinding
+import com.thoughtworks.mylibrary.ui.innercontainerfragment.InnerContainerFragment
 
 class MyBooksFragment : Fragment() {
+
+    private var _binding: FragmentHomeBinding? = null
+
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     private lateinit var viewModel: MyBooksViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         println("MyBooksFragment: onCreateView()")
-        return inflater.inflate(R.layout.fragment_my_books, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -78,13 +85,11 @@ class MyBooksFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         println("MyBooksFragment: onViewCreated()")
         super.onViewCreated(view, savedInstanceState)
-        addBtnEvent(view)
+        addBtnEvent()
     }
 
-    private fun addBtnEvent(view: View) {
-        view.findViewById<Button>(R.id.btn_my_notes).setOnClickListener {
-            println("activity supportFragmentManager " + activity?.supportFragmentManager)
-            println("parent FragmentManager$parentFragmentManager")
+    private fun addBtnEvent() {
+        binding.btnMyNotes.setOnClickListener {
             activity?.supportFragmentManager?.run {
                 beginTransaction()
                     .add(R.id.nav_host_fragment_activity_main, InnerContainerFragment::class.java, Bundle())

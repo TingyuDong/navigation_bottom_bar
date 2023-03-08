@@ -6,19 +6,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import com.thoughtworks.myapplicationbottombar.R
+import com.thoughtworks.mylibrary.databinding.FragmentSelectItemBinding
 
 class SelectItemFragment : Fragment() {
+
+    private var _binding: FragmentSelectItemBinding? = null
+
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     private lateinit var viewModel: SelectItemViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_select_item, container, false)
+    ): View {
+        _binding = FragmentSelectItemBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -32,7 +39,7 @@ class SelectItemFragment : Fragment() {
     }
 
     private fun addBtnEvent() {
-        view?.findViewById<Button>(R.id.btn_news)?.setOnClickListener {
+        binding.btnNews.setOnClickListener {
             findNavController().navigate(R.id.newsContainerFragment)
         }
     }
