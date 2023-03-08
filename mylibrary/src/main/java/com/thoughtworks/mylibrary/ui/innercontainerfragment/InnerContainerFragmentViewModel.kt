@@ -1,4 +1,4 @@
-package com.thoughtworks.myapplicationbottombar.ui.innercontainerfragment
+package com.thoughtworks.mylibrary.ui.innercontainerfragment
 
 import androidx.lifecycle.ViewModel
 

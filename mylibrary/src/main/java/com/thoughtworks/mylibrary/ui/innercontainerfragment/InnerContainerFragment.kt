@@ -1,5 +1,6 @@
-package com.thoughtworks.myapplicationbottombar.ui.innercontainerfragment
+package com.thoughtworks.mylibrary.ui.innercontainerfragment
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,8 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
-import com.thoughtworks.myapplicationbottombar.R
 import com.thoughtworks.myapplicationbottombar.`interface`.NestedFragment
+import com.thoughtworks.mylibrary.R
 
 class InnerContainerFragment : Fragment(), NestedFragment {
 
@@ -19,7 +20,7 @@ class InnerContainerFragment : Fragment(), NestedFragment {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        println("InnerContainerFragment: onCreateView()")
+        println("mylibrary:InnerContainerFragment: onCreateView()")
         return inflater.inflate(R.layout.fragment_inner_container_fragment, container, false)
     }
 
@@ -55,23 +56,58 @@ class InnerContainerFragment : Fragment(), NestedFragment {
     private fun getCurrentFragment() = childFragmentManager.findFragmentById(R.id.inner_fragment)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        println("InnerContainerFragment: onViewCreated()")
+        println("mylibrary:InnerContainerFragment: onViewCreated()")
         super.onViewCreated(view, savedInstanceState)
     }
 
-    override fun onStart() {
-        println("InnerContainerFragment: onStart()")
-        super.onStart()
+    override fun onAttach(context: Context) {
+        println("mylibrary:InnerContainerFragment: onAttach()")
+        super.onAttach(context)
     }
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        println("InnerContainerFragment: onViewStateRestored()")
+        println("mylibrary:InnerContainerFragment: onViewStateRestored()")
         super.onViewStateRestored(savedInstanceState)
     }
 
+    override fun onStart() {
+        println("mylibrary:InnerContainerFragment: onStart()")
+        super.onStart()
+    }
+
     override fun onResume() {
-        println("InnerContainerFragment: onResume()")
+        println("mylibrary:InnerContainerFragment: onResume()")
         super.onResume()
+    }
+
+    override fun onStop() {
+        println("mylibrary:InnerContainerFragment: onStop()")
+        super.onStop()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        println("mylibrary:InnerContainerFragment: onSaveInstanceState()")
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        println("mylibrary:InnerContainerFragment: onCreate()")
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onDestroyView() {
+        println("mylibrary:InnerContainerFragment: onDestroyView()")
+        super.onDestroyView()
+    }
+
+    override fun onDestroy() {
+        println("mylibrary:InnerContainerFragment: onDestroy()")
+        super.onDestroy()
+    }
+
+    override fun onDetach() {
+        println("mylibrary:InnerContainerFragment: onDetach()")
+        super.onDetach()
     }
 
 }

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">My Application Bottom Bar</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_news">news</string>
+    <string name="my_notes">My Notes</string>
+    <string name="my_books">My Books</string>
+    <string name="this_is_my_books">This is my Books</string>
+    <string name="news">News</string>
+    <string name="news_detail">News Detail</string>
+    <string name="this_is_news">This is news</string>
+    <string name="this_is_news_detail">This is newsDetail</string>
+    <string name="math">Math</string>
+    <string name="select_item">Select Item</string>
+</resources>

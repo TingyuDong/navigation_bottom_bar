@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/navigation_news"
-        android:name="com.thoughtworks.myapplicationbottombar.ui.newscontainer.NewsContainerFragment"
+        android:name="com.thoughtworks.mylibrary.ui.newscontainer.NewsContainerFragment"
         android:label="@string/title_news"
         tools:layout="@layout/fragment_news_container" />
 
