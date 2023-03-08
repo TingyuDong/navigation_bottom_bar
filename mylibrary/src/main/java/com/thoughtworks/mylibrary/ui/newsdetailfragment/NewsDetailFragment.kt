@@ -7,9 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.thoughtworks.mylibrary.R
-import com.thoughtworks.myapplicationbottombar.ui.newsdetailfragment.NewsDetailViewModel
 
-class NewsDetailFragment : Fragment() {
+internal class NewsDetailFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
