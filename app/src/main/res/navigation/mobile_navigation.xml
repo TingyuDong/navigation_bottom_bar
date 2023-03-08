@@ -48,7 +48,7 @@
         app:startDestination="@+id/navigation_layer">
         <fragment
             android:id="@+id/navigation_layer"
-            android:name="com.thoughtworks.myapplicationbottombar.ui.layerfragment.LayerFragment"
+            android:name="com.thoughtworks.myapplicationbottombar.ui.layer.LayerFragment"
             android:label="@string/layer"
             tools:layout="@layout/fragment_layer" />
     </navigation>

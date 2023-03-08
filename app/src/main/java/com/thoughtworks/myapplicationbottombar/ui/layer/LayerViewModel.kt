@@ -1,4 +1,4 @@
-package com.thoughtworks.myapplicationbottombar.ui.layerfragment
+package com.thoughtworks.myapplicationbottombar.ui.layer
 
 import androidx.lifecycle.ViewModel
 

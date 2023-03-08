@@ -1,4 +1,4 @@
-package com.thoughtworks.myapplicationbottombar.ui.layerfragment
+package com.thoughtworks.myapplicationbottombar.ui.layer
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -9,10 +9,6 @@ import android.view.ViewGroup
 import com.thoughtworks.myapplicationbottombar.R
 
 class LayerFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = LayerFragment()
-    }
 
     private lateinit var viewModel: LayerViewModel
 
