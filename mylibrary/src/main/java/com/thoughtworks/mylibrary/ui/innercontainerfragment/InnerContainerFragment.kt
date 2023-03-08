@@ -9,10 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
-import com.thoughtworks.myapplicationbottombar.`interface`.NestedFragment
+import com.thoughtworks.mylibrary.`interface`.NestedFragment
 import com.thoughtworks.mylibrary.R
 
-class InnerContainerFragment : Fragment(), NestedFragment {
+internal class InnerContainerFragment : Fragment(), NestedFragment {
 
     private lateinit var viewModel: InnerContainerFragmentViewModel
 

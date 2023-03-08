@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.thoughtworks.myapplicationbottombar.`interface`.NestedFragment
-import com.thoughtworks.myapplicationbottombar.ui.newscontainer.NewsContainerViewModel
+import com.thoughtworks.mylibrary.`interface`.NestedFragment
 import com.thoughtworks.mylibrary.databinding.FragmentNewsContainerBinding
 
 class NewsContainerFragment : Fragment(), NestedFragment {

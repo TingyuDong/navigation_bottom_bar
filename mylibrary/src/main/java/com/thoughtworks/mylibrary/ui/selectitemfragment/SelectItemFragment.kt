@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.thoughtworks.mylibrary.R
 import com.thoughtworks.mylibrary.databinding.FragmentSelectItemBinding
 
-class SelectItemFragment : Fragment() {
+internal class SelectItemFragment : Fragment() {
 
     private var _binding: FragmentSelectItemBinding? = null
 

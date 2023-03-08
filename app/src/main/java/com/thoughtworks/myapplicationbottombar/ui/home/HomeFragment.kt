@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.thoughtworks.myapplicationbottombar.R
 import com.thoughtworks.myapplicationbottombar.databinding.FragmentHomeBinding
+import com.thoughtworks.mylibrary.NavigatorUtil
 
 class HomeFragment : Fragment() {
 
@@ -47,7 +47,13 @@ class HomeFragment : Fragment() {
 
     private fun addBtnEvent() {
         binding.btnMyNotes.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_home_to_innerContainerFragment)
+            activity?.supportFragmentManager?.findFragmentById(R.id.nav_host_fragment_activity_main)?.run {
+                childFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.nav_host_fragment_activity_main, NavigatorUtil().getInnerContainerFragment(), Bundle())
+                    .addToBackStack("my notes")
+                    .commit()
+            }
         }
     }
 

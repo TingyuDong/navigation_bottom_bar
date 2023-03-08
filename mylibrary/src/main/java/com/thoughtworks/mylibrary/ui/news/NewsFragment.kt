@@ -10,7 +10,7 @@ import com.thoughtworks.mylibrary.R
 import com.thoughtworks.mylibrary.databinding.FragmentNewsBinding
 import com.thoughtworks.mylibrary.ui.newsdetailfragment.NewsDetailFragment
 
-class NewsFragment : Fragment() {
+internal class NewsFragment : Fragment() {
 
     private var _binding: FragmentNewsBinding? = null
 

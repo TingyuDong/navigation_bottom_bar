@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.thoughtworks.mylibrary.R
 import com.thoughtworks.mylibrary.databinding.FragmentMyNotesBinding
 
-class MyNotesFragment : Fragment() {
+internal class MyNotesFragment : Fragment() {
 
     private var _binding: FragmentMyNotesBinding? = null
 
