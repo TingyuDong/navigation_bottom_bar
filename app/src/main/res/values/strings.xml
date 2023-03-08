@@ -12,4 +12,7 @@
     <string name="this_is_news_detail">This is newsDetail</string>
     <string name="math">Math</string>
     <string name="select_item">Select Item</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="layer">layer</string>
+    <string name="layer2">I\'m layer2</string>
 </resources>

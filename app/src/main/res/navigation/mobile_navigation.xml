@@ -9,10 +9,10 @@
         android:id="@+id/navigation_home"
         android:name="com.thoughtworks.myapplicationbottombar.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/home_navigate_to_my_book"
-            app:destination="@+id/navigation_my_books"/>
+            app:destination="@+id/navigation_my_books" />
         <action
             android:id="@+id/action_navigation_home_to_innerContainerFragment"
             app:destination="@id/innerContainerFragment" />
@@ -22,7 +22,11 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.thoughtworks.myapplicationbottombar.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_navigation_dashboard_to_mobile_navigation_layer"
+            app:destination="@id/mobile_navigation_layer" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_news"
@@ -37,6 +41,15 @@
         tools:layout="@layout/fragment_my_books" />
     <fragment
         android:id="@+id/innerContainerFragment"
-        android:name="com.thoughtworks.myapplicationbottombar.ui.innercontainerfragment.InnerContainerFragment"
+        android:name="com.thoughtworks.mylibrary.ui.innercontainerfragment.InnerContainerFragment"
         android:label="InnerContainerFragment" />
+    <navigation
+        android:id="@+id/mobile_navigation_layer"
+        app:startDestination="@+id/navigation_layer">
+        <fragment
+            android:id="@+id/navigation_layer"
+            android:name="com.thoughtworks.myapplicationbottombar.ui.layerfragment.LayerFragment"
+            android:label="@string/layer"
+            tools:layout="@layout/fragment_layer" />
+    </navigation>
 </navigation>

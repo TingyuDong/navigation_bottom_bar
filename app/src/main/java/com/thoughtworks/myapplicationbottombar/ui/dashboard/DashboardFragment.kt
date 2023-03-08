@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.thoughtworks.myapplicationbottombar.R
 import com.thoughtworks.myapplicationbottombar.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
@@ -33,6 +35,17 @@ class DashboardFragment : Fragment() {
             textView.text = it
         }
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        addBtnEvent()
+    }
+
+    private fun addBtnEvent() {
+        binding.btnLayer.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_dashboard_to_mobile_navigation_layer)
+        }
     }
 
     override fun onDestroyView() {
