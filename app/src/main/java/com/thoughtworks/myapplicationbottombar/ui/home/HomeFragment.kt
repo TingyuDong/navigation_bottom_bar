@@ -6,11 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.thoughtworks.myapplicationbottombar.R
+import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.fragment.findNavController
 import com.thoughtworks.myapplicationbottombar.databinding.FragmentHomeBinding
-import com.thoughtworks.mylibrary.NavigatorUtil
 
 class HomeFragment : Fragment() {
 
@@ -47,13 +48,10 @@ class HomeFragment : Fragment() {
 
     private fun addBtnEvent() {
         binding.btnMyNotes.setOnClickListener {
-            activity?.supportFragmentManager?.findFragmentById(R.id.nav_host_fragment_activity_main)?.run {
-                childFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.nav_host_fragment_activity_main, NavigatorUtil.getInnerContainerFragment(), Bundle())
-                    .addToBackStack("my notes")
-                    .commit()
-            }
+            val request =
+                NavDeepLinkRequest.Builder.fromUri("android-app://thoughtworks.com/inner_container_fragment".toUri())
+                    .build()
+            findNavController().navigate(request)
         }
     }
 

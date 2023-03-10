@@ -42,7 +42,10 @@
     <fragment
         android:id="@+id/innerContainerFragment"
         android:name="com.thoughtworks.mylibrary.ui.innercontainerfragment.InnerContainerFragment"
-        android:label="InnerContainerFragment" />
+        android:label="InnerContainerFragment" >
+        <deepLink
+            app:uri="android-app://thoughtworks.com/inner_container_fragment"/>
+    </fragment>
     <navigation
         android:id="@+id/mobile_navigation_layer"
         app:startDestination="@+id/navigation_layer">
