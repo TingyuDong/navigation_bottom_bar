@@ -50,7 +50,7 @@ class HomeFragment : Fragment() {
             activity?.supportFragmentManager?.findFragmentById(R.id.nav_host_fragment_activity_main)?.run {
                 childFragmentManager
                     .beginTransaction()
-                    .replace(R.id.nav_host_fragment_activity_main, NavigatorUtil().getInnerContainerFragment(), Bundle())
+                    .replace(R.id.nav_host_fragment_activity_main, NavigatorUtil.getInnerContainerFragment(), Bundle())
                     .addToBackStack("my notes")
                     .commit()
             }
