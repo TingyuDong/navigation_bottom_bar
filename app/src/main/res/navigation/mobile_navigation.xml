@@ -32,7 +32,10 @@
         android:id="@+id/navigation_news"
         android:name="com.thoughtworks.mylibrary.ui.newscontainer.NewsContainerFragment"
         android:label="@string/title_news"
-        tools:layout="@layout/fragment_news_container" />
+        tools:layout="@layout/fragment_news_container" >
+        <deepLink
+            app:uri="android-app://thoughtworks.com/news_container_fragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_my_books"

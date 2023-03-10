@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.thoughtworks.mylibrary.`interface`.NestedFragment
 import com.thoughtworks.mylibrary.databinding.FragmentNewsContainerBinding
 
-class NewsContainerFragment : Fragment(), NestedFragment {
+internal class NewsContainerFragment : Fragment(), NestedFragment {
 
     private var _binding: FragmentNewsContainerBinding? = null
 
