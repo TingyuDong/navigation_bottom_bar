@@ -92,7 +92,7 @@ class MyBooksFragment : Fragment() {
         binding.btnMyNotes.setOnClickListener {
             activity?.supportFragmentManager?.run {
                 beginTransaction()
-                    .add(R.id.nav_host_fragment_activity_main, NavigatorUtil().getInnerContainerFragment(), Bundle())
+                    .add(R.id.nav_host_fragment_activity_main, NavigatorUtil.getInnerContainerFragment(), Bundle())
                     .addToBackStack("my notes")
                     // ?.setReorderingAllowed(true)
                     .commit()
